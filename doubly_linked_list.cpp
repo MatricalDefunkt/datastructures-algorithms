@@ -180,6 +180,25 @@ public:
     return -1;
   }
 
+  Node *reverse()
+  {
+    Node *temp_head = this->tail;
+    Node *temp_tail = this->head;
+
+    while (temp_head != temp_tail)
+    {
+      temp_head->next = temp_head->prev;
+      temp_head->prev = temp_tail;
+      temp_head = temp_head->prev;
+      temp_tail = temp_tail->next;
+    }
+
+    temp_head->next = temp_head->prev;
+    temp_head->prev = nullptr;
+
+    return this->tail;
+  }
+
   void display()
   {
     Node *temp = head;

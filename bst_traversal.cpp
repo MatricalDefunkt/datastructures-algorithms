@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 
 using namespace std;
 
@@ -12,8 +13,8 @@ public:
   Node(int data)
   {
     this->data = data;
-    left = nullptr;
-    right = nullptr;
+    this->left = nullptr;
+    this->right = nullptr;
   }
 };
 
@@ -29,34 +30,33 @@ public:
 
   void insert(int data)
   {
-    Node *temp = new Node(data);
+    Node *newNode = new Node(data);
     if (root == nullptr)
     {
-      root = temp;
+      root = newNode;
       return;
     }
-    Node *prev = nullptr;
     Node *curr = root;
-    while (curr != nullptr)
+    while (true)
     {
       if (data < curr->data)
       {
-        prev = curr;
+        if (curr->left == nullptr)
+        {
+          curr->left = newNode;
+          return;
+        }
         curr = curr->left;
       }
       else
       {
-        prev = curr;
+        if (curr->right == nullptr)
+        {
+          curr->right = newNode;
+          return;
+        }
         curr = curr->right;
       }
-    }
-    if (data < prev->data)
-    {
-      prev->left = temp;
-    }
-    else
-    {
-      prev->right = temp;
     }
   }
 
@@ -92,7 +92,60 @@ public:
     postorder_traversal(curr->right);
     cout << curr->data << " ";
   }
+
+  void breadth_first_traversal(Node *curr)
+  {
+    if (curr == nullptr)
+    {
+      return;
+    }
+    queue<Node *> q;
+    q.push(curr);
+    while (!q.empty())
+    {
+      Node *node = q.front();
+      q.pop();
+      cout << node->data << " ";
+      if (node->left != nullptr)
+      {
+        q.push(node->left);
+      }
+      if (node->right != nullptr)
+      {
+        q.push(node->right);
+      }
+    }
+  }
 };
+
+int main()
+{
+  Tree tree;
+  tree.insert(4);
+  tree.insert(2);
+  tree.insert(5);
+  tree.insert(6);
+  tree.insert(1);
+  tree.insert(3);
+
+  cout << "Inorder traversal: ";
+  tree.inorder_traversal(tree.root);
+  cout << endl;
+
+  cout << "Preorder traversal: ";
+  tree.preorder_traversal(tree.root);
+  cout << endl;
+
+  cout << "Postorder traversal: ";
+  tree.postorder_traversal(tree.root);
+  cout << endl;
+
+  cout << "Breadth first traversal: ";
+  tree.breadth_first_traversal(tree.root);
+  cout << endl;
+
+  return 0;
+}
 
 int main()
 {
