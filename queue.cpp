@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 template <typename T>
 class Queue
@@ -26,7 +27,7 @@ public:
     return queue.empty();
   }
 
-  std::string operator<<(const Queue<T> &queue)
+    std::string operator<<(const Queue<T> &queue)
   {
     std::string output = "";
     for (int i = 0; i < queue.size(); i++)

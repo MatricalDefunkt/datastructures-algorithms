@@ -1,5 +1,4 @@
-#include <iostream>
-#include <queue>
+#include<bits/stdc++.h>
 
 using namespace std;
 
@@ -147,27 +146,3 @@ int main()
   return 0;
 }
 
-int main()
-{
-  Tree tree;
-  tree.insert(4);
-  tree.insert(2);
-  tree.insert(5);
-  tree.insert(6);
-  tree.insert(1);
-  tree.insert(3);
-
-  cout << "Inorder traversal: ";
-  tree.inorder_traversal(tree.root);
-  cout << endl;
-
-  cout << "Preorder traversal: ";
-  tree.preorder_traversal(tree.root);
-  cout << endl;
-
-  cout << "Postorder traversal: ";
-  tree.postorder_traversal(tree.root);
-  cout << endl;
-
-  return 0;
-}
